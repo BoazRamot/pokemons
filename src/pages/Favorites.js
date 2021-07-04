@@ -55,7 +55,7 @@ const Favorites = () => {
     <Paper className={classes.pageRoot}>
       <Grid container spacing={3}>
         {favorites.map((item) => (
-          <Grid item xs={4} key={item}>
+          <Grid item xs={12} sm={6} md={3} xl={3} key={item}>
             <Tilt>
               <Pokemon id={item} short={true} isfavorite={true} />
             </Tilt>

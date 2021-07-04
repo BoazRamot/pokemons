@@ -17,7 +17,7 @@ const Pokemons = () => {
   const pokemons = useMemo(
     () =>
       pokemonsArray.map((item, index) => (
-        <Grid item xs={3} key={index + 1}>
+        <Grid item xs={12} sm={6} md={3} xl={3} key={index + 1}>
           <Tilt>
             <Pokemon id={index + 1} short={true} />
           </Tilt>
