@@ -19,7 +19,13 @@ const Player = ({ url, text, isStartPlay = false }) => {
   return (
     <div className={classes.playerRoot}>
       <Typography className={classes.typography}>{text}</Typography>
-      <audio src={url} controls autoPlay={isStartPlay} />
+      <audio
+        src={url}
+        controls
+        autoPlay={isStartPlay}
+        controlsList="nodownload"
+        style={{ width: 200 }}
+      />
     </div>
   );
 };

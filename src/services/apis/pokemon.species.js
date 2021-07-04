@@ -9,8 +9,7 @@ function getPokemonSpeciesArray(obj) {
       const id = obj.species.url.split("/")[6];
       const pokemon = await axios.get(`${BASE_URL}/pokemon/${id}`);
       const url = pokemon.data.sprites.other.dream_world.front_default;
-      // const url = pokemon.data.sprites.front_default;
-      arr[arr.length] = `${obj.species.name}***${url}`;
+      arr[arr.length] = `${obj.species.name}***${url}***${id}`;
       if (obj.evolves_to.length !== 0) {
         _getPokemonSpeciesArray(obj.evolves_to[0], arr);
       } else {

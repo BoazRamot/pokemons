@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepButton from "@material-ui/core/StepButton";
+import { Stepper, Step, StepButton, makeStyles } from "@material-ui/core";
+import PokemonActions from "../PokemonActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   stepper: {
+    width: "100%",
     backgroundColor: "transparent",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   img: {
     height: "10rem",
@@ -18,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function PokemonEvolutionChain({ pokemon }) {
+function PokemonEvolutionChain({ pokemon, matches }) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
 
@@ -37,10 +42,11 @@ function PokemonEvolutionChain({ pokemon }) {
         nonLinear
         activeStep={activeStep}
         className={classes.stepper}
+        orientation={matches ? "vertical" : "horizontal"}
       >
         {Array.isArray(pokemon.species) &&
           pokemon.species.map((item, index) => {
-            const [name, url] = item.split("***");
+            const [name, url, id] = item.split("***");
             const stepProps = {};
             const buttonProps = {};
             if (isCurrent(name)) {
@@ -56,6 +62,11 @@ function PokemonEvolutionChain({ pokemon }) {
                     src={url}
                     title={name}
                     alt="Pokemon"
+                  />
+                  <PokemonActions
+                    isfavorite={false}
+                    id={Number(id)}
+                    short={true}
                   />
                 </StepButton>
               </Step>

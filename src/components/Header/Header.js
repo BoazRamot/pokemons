@@ -7,7 +7,9 @@ import {
   Toolbar,
   Typography,
   Link,
+  useMediaQuery,
 } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
 import { Link as RouterLink } from "react-router-dom";
 import Player from "../Player/Player";
 
@@ -22,6 +24,8 @@ const useStyles = makeStyles((theme) =>
 );
 
 const Header = () => {
+  const theme = useTheme();
+  const matchesXs = useMediaQuery(theme.breakpoints.between(0, "xs"));
   const isStartPlay = useSelector((state) => state.app.isStartPlay);
   const classes = useStyles();
 
@@ -40,11 +44,13 @@ const Header = () => {
             </Typography>
           </Link>
           <div className={classes.title}></div>
-          <Player
-            text={"The Pokemons Theme"}
-            url={`${process.env.PUBLIC_URL}/audio/pokemon.mp3`}
-            isStartPlay={isStartPlay}
-          />
+          {!matchesXs && (
+            <Player
+              text={"The Pokemons Theme"}
+              url={`${process.env.PUBLIC_URL}/audio/pokemon.mp3`}
+              isStartPlay={isStartPlay}
+            />
+          )}
         </Toolbar>
       </AppBar>
     </div>

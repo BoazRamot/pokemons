@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PokemonData = ({ short = false, pokemon }) => {
+const PokemonData = ({ short = false, pokemon, matches }) => {
   const classes = useStyles();
 
   return short ? null : (
@@ -62,7 +62,7 @@ const PokemonData = ({ short = false, pokemon }) => {
           <Typography>Evolution Chain</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <PokemonEvolutionChain pokemon={pokemon} />
+          <PokemonEvolutionChain pokemon={pokemon} matches={matches} />
         </AccordionDetails>
       </Accordion>
     </div>

@@ -5,7 +5,13 @@ import { getPokemonSpecies } from "../../services/apis/pokemon.species";
 import { getPokemonById } from "../../selectors/pokemonSelector";
 import { getFavoriteById, getFavoritesSize } from "../../selectors/appSelector";
 import { addToFavorites, removeFromFavorites } from "../../slices/appSlice";
-import { Card, CardContent, makeStyles } from "@material-ui/core";
+import {
+  Card,
+  CardContent,
+  makeStyles,
+  useMediaQuery,
+} from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
 import PokemonActions from "./PokemonActions";
 import PokemonTypes from "./PokemonTypes";
 import PokemonData from "./PokemonData/PokemonData";
@@ -62,6 +68,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Pokemon = ({ id, short = false, isfavorite = false, match }) => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.between(0, "xs"));
   const dispatch = useDispatch();
   const {
     pokemon = 0,
@@ -127,7 +135,7 @@ const Pokemon = ({ id, short = false, isfavorite = false, match }) => {
         />
         <PokemonTypes types={pokemon.types} typesColor={typesColor} />
         {!short && <Player url={pokemon.cry} text={"The Pokemon Cry"} />}
-        <PokemonData short={short} pokemon={pokemon} />
+        <PokemonData short={short} pokemon={pokemon} matches={matches} />
         <PokemonActions isfavorite={isfavorite} short={short} id={id} />
       </CardContent>
     </Card>
