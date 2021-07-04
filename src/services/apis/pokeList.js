@@ -21,6 +21,7 @@ export const getPokeList = createAsyncThunk(
       const pokemon = {
         id: data.data.id,
         name: data.data.name,
+        cry: `https://play.pokemonshowdown.com/audio/cries/${data.data.name}.mp3`,
         gameIndices: data.data.game_indices.map((item) => item.version.name),
         locationAreaEncounters: data.data.location_area_encounters,
         moves: data.data.moves.map((item) => item.move.name),

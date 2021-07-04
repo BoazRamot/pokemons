@@ -4,6 +4,7 @@ import { loadState } from "../services/appPersisting/appPersisting";
 export const appSlice = createSlice({
   name: "app",
   initialState: {
+    isStartPlay: true,
     isDarkMode: false,
     favorites: {},
   },
@@ -11,22 +12,11 @@ export const appSlice = createSlice({
     hydrate: (state, action) => {
       return action.payload;
     },
-    changeDarkMode: (state) => {
-      state.isDarkMode = !state.isDarkMode;
-    },
     addToFavorites: (state, action) => {
       state.favorites[action.payload.id] = action.payload;
     },
     removeFromFavorites: (state, action) => {
       delete state.favorites[action.payload];
-    },
-    restoreAppData: (state, action) => {
-      // state.isDarkMode = action.payload.isDarkMode;
-      // state.favorites = action.payload.favorites;
-      state = {
-        ...state,
-        ...action.payload,
-      };
     },
   },
   extraReducers: {
@@ -39,7 +29,7 @@ export const appSlice = createSlice({
   },
 });
 
-export const { changeDarkMode, addToFavorites, removeFromFavorites, hydrate } =
+export const { addToFavorites, removeFromFavorites, hydrate } =
   appSlice.actions;
 
 export default appSlice.reducer;

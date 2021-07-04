@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getPokeList, getPokeItem } from "../services/apis/pokeList";
-// import { getPokeData } from "../services/apis/pokeData";
 import { getPokemonLocations } from "../services/apis/pokemon.locations";
 import { getPokemonSpecies } from "../services/apis/pokemon.species";
 
@@ -8,7 +7,6 @@ export const pokemonSlice = createSlice({
   name: "pokemon",
   initialState: {
     poke: {},
-    // poke: new Map(),
     loading: false,
     error: null,
     from: 1,
@@ -30,21 +28,6 @@ export const pokemonSlice = createSlice({
     [getPokemonSpecies.fulfilled]: (state, action) => {
       state.poke[action.payload.id]["species"] = action.payload.species;
     },
-    // [getPokeList.fulfilled]: async (state, action) => {
-    //   const arr = action.payload.data.results;
-    //   for (let index = 0; index < arr.length; index++) {
-    //     const data = await getPokeData(index + 1);
-    //     // state.poke.set(index + 1, arr[index]);
-    //     state.poke[index + 1] = arr[index];
-    //   }
-    // },
-    // [getPokeData.fulfilled]: (state, action) => {
-    //   const arr = action.payload.data.results;
-    //   for (let index = 0; index < arr.length; index++) {
-    //     // state.poke.set(index + 1, arr[index]);
-    //     state.poke[index + 1] = arr[index];
-    //   }
-    // },
   },
 });
 

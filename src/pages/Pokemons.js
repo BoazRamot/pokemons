@@ -1,35 +1,37 @@
-import React from "react";
-// import { useSelector } from "react-redux";
+import React, { useMemo, memo } from "react";
 import Pokemon from "../components/Pokemon/Pokemon";
 import { Paper, Grid, makeStyles } from "@material-ui/core";
 import Tilt from "react-parallax-tilt";
 
 const useStyles = makeStyles((theme) => ({
   pageRoot: {
-    paddingTop: "6rem",
+    flexGrow: 1,
+    padding: "6rem 1rem 1rem 1rem",
   },
 }));
 
+const pokemonsArray = Array(151).fill();
+
 const Pokemons = () => {
   const classes = useStyles();
-
-  // const pokeList = useSelector((state) => state.pokemon.poke);
-
+  const pokemons = useMemo(
+    () =>
+      pokemonsArray.map((item, index) => (
+        <Grid item xs={3} key={index + 1}>
+          <Tilt>
+            <Pokemon id={index + 1} short={true} />
+          </Tilt>
+        </Grid>
+      )),
+    []
+  );
   return (
-    <Paper>
-      <Grid container spacing={3} className={classes.pageRoot}>
-        {Array(151)
-          .fill()
-          .map((item, index) => (
-            <Grid item xs={3} key={index + 1}>
-              <Tilt>
-                <Pokemon id={index + 1} short={true} />
-              </Tilt>
-            </Grid>
-          ))}
+    <Paper className={classes.pageRoot}>
+      <Grid container spacing={3}>
+        {pokemons}
       </Grid>
     </Paper>
   );
 };
 
-export default Pokemons;
+export default memo(Pokemons);
